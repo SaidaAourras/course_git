@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 export const fetchCourses = createAsyncThunk('courses/fetchCourses', async () => {
-  const response = await fetch('/api/courses'); // Replace with your API
+  const response = await fetch('http://localhost:8000/courses'); 
   return response.json();
 });
 
