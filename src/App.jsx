@@ -1,17 +1,27 @@
+// src/App.js
 import React from 'react';
-import { Provider } from 'react-redux';
-import store from './store';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import CourseList from './components/CourseList';
+import CourseDetails from './components/CourseDetails';
+import CourseForm from './components/CourseForm';
+import { Provider } from 'react-redux';
+import store from './store'
+import Navbar from './components/Navbar';
 import Login from './components/Login';
 
 const App = () => {
   return (
     <Provider store={store}>
-      <div>
-        <h1>Course Management App</h1>
-        <Login />
-        <CourseList />
-      </div>
+      <Router>
+        <Navbar></Navbar>
+        <Routes>
+        <Route path="/" element={<Login />} />
+          <Route path="/courses" element={<CourseList />} />
+          <Route path="/courses/:id" element={<CourseDetails />} />
+          <Route path="/courses/add" element={<CourseForm />} />               
+          <Route path="/courses/:id/edit" element={<CourseForm />} />
+        </Routes>
+      </Router>
     </Provider>
   );
 };

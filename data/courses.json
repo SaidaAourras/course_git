@@ -1,0 +1,70 @@
+{
+  "courses": [
+    {
+      "id": "3",
+      "title": "Data Science and Machine Learning",
+      "image": "https://th.bing.com/th/id/OIP.V8UKqlYd9XY1ePX5aUSqygHaHa?rs=1&pid=ImgDetMain",
+      "details": "Dive into data analysis, visualization, and machine learning using Python. Explore libraries like Pandas, Matplotlib, and Scikit-Learn to gain insights from data."
+    },
+    {
+      "id": "4",
+      "title": "Digital Marketing Strategies",
+      "image": "https://th.bing.com/th/id/OIP.V8UKqlYd9XY1ePX5aUSqygHaHa?rs=1&pid=ImgDetMain",
+      "details": "Master SEO, social media marketing, and email campaigns. Learn how to drive traffic and convert leads using the latest digital marketing techniques."
+    },
+    {
+      "id": "5",
+      "title": "Graphic Design Fundamentals",
+      "image": "https://th.bing.com/th/id/OIP.V8UKqlYd9XY1ePX5aUSqygHaHa?rs=1&pid=ImgDetMain",
+      "details": "Learn the principles of graphic design, typography, and color theory. Use tools like Adobe Photoshop and Illustrator to create stunning visuals and branding."
+    },
+    {
+      "id": "6",
+      "title": "Cybersecurity Essentials",
+      "image": "https://th.bing.com/th/id/OIP.V8UKqlYd9XY1ePX5aUSqygHaHa?rs=1&pid=ImgDetMain",
+      "details": "Understand the basics of cybersecurity, network security, and cryptography. Protect systems and data from threats and develop skills for a career in security."
+    },
+    {
+      "id": "7",
+      "title": "Mobile App Development with React Native",
+      "image": "https://th.bing.com/th/id/OIP.V8UKqlYd9XY1ePX5aUSqygHaHa?rs=1&pid=ImgDetMain",
+      "details": "Build cross-platform mobile apps for iOS and Android using React Native. Learn to create smooth and responsive user interfaces with real-time examples."
+    },
+    {
+      "id": "8",
+      "title": "Artificial Intelligence for Beginners",
+      "image": "https://th.bing.com/th/id/OIP.V8UKqlYd9XY1ePX5aUSqygHaHa?rs=1&pid=ImgDetMain",
+      "details": "Explore the basics of AI, including neural networks and deep learning. Understand how AI systems are trained and applied in fields like robotics, healthcare, and more."
+    },
+    {
+      "id": "9",
+      "title": "Project Management Professional (PMP) Training",
+      "image": "https://th.bing.com/th/id/OIP.V8UKqlYd9XY1ePX5aUSqygHaHa?rs=1&pid=ImgDetMain",
+      "details": "Prepare for the PMP certification with this course, covering project management frameworks, methodologies, and best practices to lead successful projects."
+    },
+    {
+      "id": "10",
+      "title": "Financial Analysis and Investment",
+      "image": "https://th.bing.com/th/id/OIP.V8UKqlYd9XY1ePX5aUSqygHaHa?rs=1&pid=ImgDetMain",
+      "details": "Gain a deep understanding of financial statements, investment strategies, and risk analysis. Learn how to make data-driven decisions in the world of finance."
+    },
+    {
+      "id": "bab8cae3-e716-4ea0-9dfc-df79208739e5",
+      "title": "new wdit",
+      "category": "Category 3",
+      "image": "blob:http://localhost:5173/eb1d50d1-01dd-4984-a192-70d16a294405"
+    },
+    {
+      "id": "d7e2393f-64d2-4ef4-b03b-f5e4120dca64",
+      "title": "kdxfjglkdf",
+      "category": "Category 3",
+      "image": "blob:http://localhost:5173/582bdcdd-9c29-4673-9355-e88a7e26f1c7"
+    },
+    {
+      "id": "16d8b52c-1476-45ae-93a0-adfc8236a199",
+      "title": "uuuuuuuuuuuuuuuuuuuuuuuuuuu",
+      "category": "Category 3",
+      "image": "blob:http://localhost:5173/eafcd453-5eae-4020-b0e7-cff67572acc3"
+    }
+  ]
+}
