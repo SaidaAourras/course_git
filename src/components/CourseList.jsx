@@ -1,12 +1,16 @@
 // src/components/CourseList.js
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchCourses,deleteCourse} from '../features/CourseSlice';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchCourses,
+  deleteCourse,
+  updateCourse,
+} from "../features/CourseSlice";
+import { Link } from "react-router-dom";
 
 const CourseList = () => {
   const dispatch = useDispatch();
-  const {courses,status} = useSelector((state) => state.courses);
+  const { courses, status } = useSelector((state) => state.courses);
   const { role } = useSelector((state) => state.auth);
 
   useEffect(() => {
@@ -21,7 +25,7 @@ const CourseList = () => {
     <div className="container">
       <div className="d-flex justify-content-between align-items-center">
         <h2>Courses</h2>
-        {role === 'admin' && (
+        {role === "admin" && (
           <Link to="/courses/add" className="btn btn-primary">
             Add Course
           </Link>
@@ -42,7 +46,11 @@ const CourseList = () => {
               <td>{course.id}</td>
               <td>
                 {course.image ? (
-                  <img src={course.image} alt={course.title} style={{ width: '100px', height: 'auto' }} />
+                  <img
+                    src={course.image}
+                    alt={course.title}
+                    style={{ width: "100px", height: "auto" }}
+                  />
                 ) : (
                   <span>No Image</span>
                 )}
@@ -52,12 +60,18 @@ const CourseList = () => {
                 <Link to={`/courses/${course.id}`} className="btn btn-info">
                   View Details
                 </Link>
-                {role === 'admin' && (
+                {role === "admin" && (
                   <>
-                    <Link to={`/courses/${course.id}/edit`} className="btn btn-warning mx-2">
+                    <Link
+                      to={`/courses/${course.id}/edit`}
+                      className="btn btn-warning mx-2"
+                    >
                       Edit
                     </Link>
-                    <button className="btn btn-danger" onClick={() => handleDelete(course.id)}>
+                    <button
+                      className="btn btn-danger"
+                      onClick={() => handleDelete(course.id)}
+                    >
                       Delete
                     </button>
                   </>

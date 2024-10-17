@@ -1,86 +1,119 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 
 // Thunk for fetching courses
-export const fetchCourses = createAsyncThunk('courses/fetchCourses', async () => {
-  const response = await axios.get('http://localhost:3000/courses');
-  return response.data;
-});
+export const fetchCourses = createAsyncThunk(
+  "courses/fetchCourses",
+  async () => {
+    const response = await axios.get("http://localhost:3000/courses");
+    console.log("Fetched courses:", response.data); // Log the response data
+    return response.data;
+  }
+);
 
 // Thunk for adding a course
-export const addCourse = createAsyncThunk('courses/addCourse', async (course) => {
-  const response = await axios.post('http://localhost:3000/courses', course);
-  return response.data;
-});
+export const addCourse = createAsyncThunk(
+  "courses/addCourse",
+  async (course) => {
+    const response = await axios.post("http://localhost:3000/courses", course);
+    return response.data;
+  }
+);
 
 // Thunk for deleting a course
-export const deleteCourse = createAsyncThunk('courses/deleteCourse', async (id) => {
-  await axios.delete(`http://localhost:3000/courses/${id}`);
-  return id;
-});
+export const deleteCourse = createAsyncThunk(
+  "courses/deleteCourse",
+  async (id) => {
+    await axios.delete(`http://localhost:3000/courses/${id}`);
+    return id;
+  }
+);
 
 // Thunk for updating a course
-export const updateCourse = createAsyncThunk('courses/updateCourse', async (course) => {
-  const response = await axios.put(`http://localhost:3000/courses/${course.id}`, course);
-  return response.data;
-});
+export const updateCourse = createAsyncThunk(
+  "courses/updateCourse",
+  async (course) => {
+    const response = await axios.put(
+      `http://localhost:3000/courses/${course.id}`,
+      course
+    );
+    return response.data;
+  }
+);
 
 // Thunk for adding a comment
-export const addComment = createAsyncThunk('courses/addComment', async ({ courseId, comment }) => {
-  const response = await axios.post(`http://localhost:3000/courses/${courseId}/comments`, { comment });
-  return { courseId, comment: response.data };
-});
+export const addComment = createAsyncThunk(
+  "courses/addComment",
+  async ({ courseId, comment }) => {
+    const response = await axios.post(
+      `http://localhost:3000/courses/${courseId}/comments`,
+      { comment }
+    );
+    return { courseId, comment: response.data.comment }; // Ensure correct return structure
+  }
+);
 
 const courseSlice = createSlice({
-  name: 'courses',
+  name: "courses",
   initialState: {
     courses: [],
-    comments: {},  // Initialize comments as an object
-    status: 'idle',
-    error: null
+    status: "idle",
+    error: null,
   },
   reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchCourses.pending, (state) => {
-        state.status = 'loading';
+        state.status = "loading";
       })
       .addCase(fetchCourses.fulfilled, (state, action) => {
-        state.courses = action.payload;
-        state.status = 'succeeded';
+        // Convert IDs to numbers
+        state.courses = action.payload.map((course) => ({
+          ...course,
+          id: Number(course.id), // Convert ID to number
+          comments: course.comments || [], // Initialize comments if not present
+        }));
+        state.status = "succeeded";
       })
       .addCase(fetchCourses.rejected, (state, action) => {
-        state.status = 'failed';
+        state.status = "failed";
         state.error = action.error.message;
       })
       .addCase(addCourse.fulfilled, (state, action) => {
-        state.courses.push(action.payload);
-        // Initialize comments for the new course
-        state.comments[action.payload.id] = [];
+        state.courses.push({
+          ...action.payload,
+          id: Number(action.payload.id), // Ensure ID is a number
+          comments: [], // Initialize comments as an empty array
+        });
       })
       .addCase(deleteCourse.fulfilled, (state, action) => {
-        state.courses = state.courses.filter(course => course.id !== action.payload);
-        // Remove comments for the deleted course
-        delete state.comments[action.payload];
+        state.courses = state.courses.filter(
+          (course) => course.id !== action.payload
+        );
       })
       .addCase(updateCourse.fulfilled, (state, action) => {
-        const index = state.courses.findIndex(course => course.id === action.payload.id);
-        if (index === -1) {
-          // If course doesn't exist, you might want to handle it (e.g., log an error)
-          console.error(`Course with ID ${action.payload.id} not found for update.`);
+        const index = state.courses.findIndex(
+          (course) => course.id === action.payload.id
+        );
+        if (index !== -1) {
+          state.courses[index] = {
+            ...action.payload,
+            comments: state.courses[index].comments || [],
+          };
         } else {
-          // Update the existing course with new data
-          state.courses[index] = action.payload;
+          console.error(
+            `Course with ID ${action.payload.id} not found for update.`
+          );
         }
       })
       .addCase(addComment.fulfilled, (state, action) => {
         const { courseId, comment } = action.payload;
-        if (!state.comments[courseId]) {
-          state.comments[courseId] = []; // Initialize comments array if not present
+        const course = state.courses.find((course) => course.id === courseId);
+        if (course) {
+          course.comments.push(comment); // Push the comment object directly
         }
-        state.comments[courseId].push(comment);
       });
-  }
+  },
 });
 
 export default courseSlice.reducer;
